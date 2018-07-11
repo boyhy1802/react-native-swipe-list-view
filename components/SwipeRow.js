@@ -88,7 +88,7 @@ class SwipeRow extends Component {
 		if (this.props.onRowPress) {
       this._translateX.setValue(this.props.rightOpenValue);
       this.manuallySwipeRow(this.props.rightOpenValue);
-      this.props.onRowPress();
+//       this.props.onRowPress();
     } else {
 			if (this.props.closeOnRowPress) {
 				this.closeRow();
