@@ -86,16 +86,18 @@ class SwipeRow extends Component {
 
 	onRowPress() {
 		if (this.props.onRowPress) {
-			this.props.onRowPress();
-		} else {
+      this._translateX.setValue(this.props.rightOpenValue);
+      this.manuallySwipeRow(this.props.rightOpenValue);
+      this.props.onRowPress();
+    } else {
 			if (this.props.closeOnRowPress) {
 				this.closeRow();
-			}
+      }
 		}
 	}
 
 	handleOnMoveShouldSetPanResponder(e, gs) {
-		const { dx } = gs;
+    const { dx } = gs;
 		return Math.abs(dx) > this.props.directionalDistanceChangeThreshold;
 	}
 
@@ -143,14 +145,13 @@ class SwipeRow extends Component {
 	}
 
 	ensureScrollEnabled = () => {
-		if (!this.parentScrollEnabled) {
+    if (!this.parentScrollEnabled) {
 			this.parentScrollEnabled = true;
 			this.props.setScrollEnabled && this.props.setScrollEnabled(true);
 		}
 	}
 
 	handlePanResponderEnd(e, gestureState) {
-
 		// decide how much the velocity will affect the final position that the list item settles in.
 		const swipeToOpenVelocityContribution = this.props.swipeToOpenVelocityContribution;
 		const possibleExtraPixels = this.props.rightOpenValue * (swipeToOpenVelocityContribution);
@@ -229,7 +230,6 @@ class SwipeRow extends Component {
 	renderVisibleContent() {
 		// handle touchables
 		const onPress = this.props.children[1].props.onPress;
-
 		if (onPress) {
 			const newOnPress = _ => {
 				this.onRowPress();
